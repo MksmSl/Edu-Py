@@ -1,0 +1,5 @@
+print('Enter the first digit: ', end='')
+a=input()
+print('Enter the second digit: ', end='')
+b=input()
+print('The difference is:', int(a)-int(b))
