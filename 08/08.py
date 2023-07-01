@@ -1,60 +1,30 @@
+# There has to a cod until str 12 if cats == rounds
 def rounds_cats_in_hats(n_cats, rounds):
+    iterations = 0
     cats = []
-    for i in range(n_cats + 1):
-        cats.append(False)
-    for i in range(1, rounds + 1):
-        for j in range(1, n_cats//i+1):
-            cats[j*i] = False if cats[j*i] == True else True
-    for i in range(1, n_cats + 1):
-        if cats[i] == True:
-            print(i, ' ', end='')
+    if n_cats == rounds:
+        for i in range(1, int(n_cats**0.5 + 1)):
+            cats.append(i**2)
+            iterations += 1
+        print('List of cats ws a hat:')
+        print(cats)
+        print(f'Total amount of iterations is {iterations}')
+    else:
+        for i in range(n_cats + 1):  # list of cats wo hats
+            cats.append(False)
+            iterations += 1
+        for i in range(1, rounds + 1):  # rounds
+            iterations += 1
+            for j in range(1, n_cats//i+1):  # putting on/off hats only to every numbers round cat
+                iterations += 1
+                cats[j*i] = False if cats[j*i] is True else True
+        print('List of cats ws a hat:')
+        for i in range(1, n_cats + 1):  # printing numbers of cats ws a hat
+            if cats[i] is True:
+                print(i, ' ', end='')
+        print()
+        print(f'Total amount of iterations is {iterations}')
 
 
-rounds_cats_in_hats(100, 2)       
-    
 
-
-
-
-# # for i in range(100):
-# #     print(i)
-
-# # i = 3
-# cats = []
-# for i in range(100):
-#     cats.append(False)
-# # print(cats)
-# # print(cats[99])
-
-# n_rounds = 50
-# # def round_for_cats(i: int, cat_list: list) -> list:
-# for i in range(1, n_rounds+1):
-#     if i < 50:
-#         for j in range(100//i):
-#             if j == 0:
-#                 cats[0] = True
-#             elif cats[j*(i)-1] == True:
-#                 cats[j*(i)-1] = False
-#             else:
-#                 cats[j*(i)-1] = True
-#     else:
-#         if cats[i-1] == True:
-#             cats[i-1] = False
-#         else:
-#             cats[i-1] = True
-
-# for i in range(100):
-#     if cats[i] == True:
-#         print (str(i+1))
-
-# # for i in range(1, 101):
-# #     if cats[i] == True:
-# #         print(1 + '  ')
-            
-        
-    
-
-
-# # 1 100
-# # 2 100/2
-# # 3 100%%3
+rounds_cats_in_hats(100, 100)
