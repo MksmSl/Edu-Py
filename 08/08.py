@@ -1,4 +1,4 @@
-# There has to a cod until str 12 if cats == rounds
+# There has to be a cod until str 12 if cats == rounds
 def rounds_cats_in_hats(n_cats, rounds):
     iterations = 0
     cats = []
