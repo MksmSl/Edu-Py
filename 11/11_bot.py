@@ -11,9 +11,11 @@ def search_gif(word):
 
     with request.urlopen("".join((url, "?", params))) as response:
         data = json.loads(response.read())
-    return data.get('data')[0].get('images').get('original').get('url')
-
-
+    try:
+        result = data.get('data')[0].get('images').get('original').get('url') 
+        return result
+    except IndexError:
+        return 'We didn\'t find a gif releted to your word'
 
 
 from aiogram import Bot, Dispatcher, executor, types
