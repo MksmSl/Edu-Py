@@ -48,31 +48,33 @@ def check_types(func):
     def wrapper(*args):
         for i in args:
             if not isinstance(i, int):
-                print(f'TypeError: Argument a must be int, not {type(i)}')
+                print(f'TypeError: Argument must be int, not {type(i)}')
                 return print('Please, enter an int')
-        if not isinstance(func(*args), int):
-            print(f'TypeError: Result a must be int, not {type(func(*args))}')
+        func_result = func(*args)
+        if not isinstance(func_result, int):
+            print(int(func_result))
         else:
-            print(func(*args))
+            print(func_result)
     return wrapper
 
 
 @check_types
 def add(a: int, b: int) -> int:
-    return a + b
+    return a / b
 
 
 add(8, 4)
-
+add('8', [4])
 print('Task 4')
 
 
 cashe = {}
 def cash_decor(func):
     def wrapper(arg):
-        if arg not in list(cashe.keys()):
-            cashe[arg] = func(arg)
-            print(func(arg))
+        if arg not in cashe:
+            func_result = func(arg)
+            cashe[arg] = func_result
+            print(func_result)
         else:
             print(f'cashe result {cashe[4]}')
     return wrapper
