@@ -4,10 +4,13 @@ print('Task 1')
 def is_admin(func):
     def wrapper(**kwargs):
         user_type = kwargs['user_type'] 
-        if user_type == 'admin':
-            func(user_type)
-        else:
-            print('ValueError: Permission denied')
+        try:
+            if user_type == 'admin':
+                func(user_type)
+            else:
+                raise ValueError()
+        except ValueError as ev:
+            print(f'ValueError: Permission denied')
     return wrapper
 
 
@@ -16,7 +19,7 @@ def show_customer_receipt(user_type: str):
     print('# Some very dangerous operation')
 
 
-show_customer_receipt(user_type='admin')
+show_customer_receipt(user_type='sadmin')
 
 
 print('Task 2')
@@ -46,25 +49,29 @@ print('Task 3')
 
 def check_types(func):
     def wrapper(*args):
-        for i in args:
-            if not isinstance(i, int):
-                print(f'TypeError: Argument must be int, not {type(i)}')
-                return print('Please, enter an int')
-        func_result = func(*args)
-        if not isinstance(func_result, int):
-            print(int(func_result))
-        else:
-            print(func_result)
+        count_result = 0
+        annot = func.__annotations__
+        for i, v in enumerate(args):
+            agr_name = list(annot)[i]
+            if type(v) != annot[agr_name]:
+                print(f'{agr_name} should be a {annot[agr_name]}')
+                count_result += 1
+        if count_result == 0:
+            fucn_res = func(*args)
+            if type(fucn_res) == annot['return']:
+                print(fucn_res)
+            else:
+                print(int(fucn_res))
     return wrapper
 
 
 @check_types
 def add(a: int, b: int) -> int:
-    return a / b
+    return a + b
 
 
-add(8, 4)
-add('8', [4])
+add(5, 4)
+
 print('Task 4')
 
 
