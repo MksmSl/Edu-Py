@@ -8,7 +8,7 @@ def is_admin(func):
             if user_type == 'admin':
                 func(user_type)
             else:
-                raise ValueError()
+                raise ValueError('ValueError: Permission denied')
         except ValueError as ev:
             print(f'ValueError: Permission denied')
     return wrapper
@@ -19,7 +19,7 @@ def show_customer_receipt(user_type: str):
     print('# Some very dangerous operation')
 
 
-show_customer_receipt(user_type='sadmin')
+show_customer_receipt(user_type=1)
 
 
 print('Task 2')
