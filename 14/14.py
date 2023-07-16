@@ -108,6 +108,7 @@ class Bank():
     def __init__(self, accounts: list[Account]):
         self.accounts = accounts
 
+
     def update(self):
         for i, val_acc in enumerate(self.accounts):
             if type(val_acc) == SavingsAccount:
