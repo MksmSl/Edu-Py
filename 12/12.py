@@ -2,15 +2,11 @@ print('Task 1')
 
 
 def is_admin(func):
-    def wrapper(**kwargs):
-        user_type = kwargs['user_type'] 
-        try:
-            if user_type == 'admin':
-                func(user_type)
-            else:
-                raise ValueError('ValueError: Permission denied')
-        except ValueError as ev:
-            print(f'ValueError: Permission denied')
+    def wrapper(*agrs, **kwargs):
+        if kwargs['user_type'] != 'admin':
+            raise ValueError('ValueError: Permission denied')
+        func(*agrs, **kwargs)
+
     return wrapper
 
 
@@ -19,7 +15,10 @@ def show_customer_receipt(user_type: str):
     print('# Some very dangerous operation')
 
 
-show_customer_receipt(user_type=1)
+try:
+    show_customer_receipt(user_type='admin')
+except Exception:
+    pass
 
 
 print('Task 2')

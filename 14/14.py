@@ -85,8 +85,8 @@ class Account:
     # def get_account_number(self):
     #     return self._account_number
     
-    # def __str__(self):
-    #     return f'Account number: {self._account_number}, balance: {self._balance}'
+    def __str__(self):
+        return f'Account number: {self._account_number}, balance: {self._balance}'
 
 
 class SavingsAccount(Account):
@@ -95,7 +95,11 @@ class SavingsAccount(Account):
         self._interest = interest
 
     def add_intersts(self):
-        self._balance += self._balance*self._interest/100       
+        self._balance += self._balance*self._interest/100
+
+
+    def __str__(self):
+        return f'Account number: {self._account_number}, balance: {self._balance}, interest: {self._interest}'    
 
 
 class CurrentAccount(Account):
@@ -113,11 +117,9 @@ class Bank():
         for i, val_acc in enumerate(self.accounts):
             if type(val_acc) == SavingsAccount:
                 val_acc.add_intersts()
-                print(i, val_acc, 'SavingsAccount')
+                print(val_acc)
             if type(val_acc) == CurrentAccount and val_acc._overdraft_limit < 0:
                 print('send the letter')
-
-
 
 
 
@@ -129,6 +131,3 @@ mono = Bank([my_save_acc, my_curr_acc])
 print(my_save_acc._balance)
 
 mono.update()
-
-# for i, account in enumerate(mono.accounts):
-#     print(account.account_number())
