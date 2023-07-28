@@ -8,10 +8,4 @@ connection = psycopg2.connect(
     port=5432,
 )
 
-with    connection.cursor() as cursor:
-
-    cursor.execute("""SELECT * FROM public.users""")
-
-    print(cursor.fetchall())
-
 
